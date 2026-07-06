@@ -1,0 +1,21 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffb347 0%, #e85a1a 60%, transparent 100%);
+  box-shadow: 0 0 8px rgba(255, 120, 40, 0.6), 0 0 20px rgba(232, 90, 26, 0.3);
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: screen;
+}
+
+.trail {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+}

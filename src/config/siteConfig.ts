@@ -8,7 +8,7 @@ export const siteConfig = {
   status: 'CURRENTLY COOKING',
   email: 'hello@praneetsavant.in',
   social: {
-    github: 'https://github.com/praneetsavant',
+    github: 'https://github.com/PraneetNS',
     linkedin: 'https://linkedin.com/in/praneetsavant',
     x: 'https://x.com/praneetsavant',
   },

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BrandLogo } from './BrandLogo'
 import './portfolio.css'
 
 const projects = [
@@ -74,7 +75,7 @@ export function App() {
   return (
     <main className="portfolio">
       <header className="topbar">
-        <a className="wordmark" href="#top" aria-label="Praneet Savant home">PS<span>.</span></a>
+        <BrandLogo />
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation">
           {menuOpen ? 'CLOSE −' : 'MENU +'}
         </button>
@@ -178,7 +179,7 @@ export function App() {
       </section>
 
       <footer className="footer">
-        <a className="wordmark" href="#top">PS<span>.</span></a>
+        <BrandLogo size={34} showText={false} />
         <span>DESIGNED & BUILT BY PRANEET SAVANT</span>
         <a href="#top">BACK TO TOP ↑</a>
         <span>© {new Date().getFullYear()}</span>

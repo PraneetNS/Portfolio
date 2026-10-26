@@ -1125,3 +1125,146 @@
   margin: 0 0.2rem;
 }
 
+/* ==================================================
+   COMMAND PALETTE MODAL
+   ================================================== */
+.command-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5rem 1rem 1rem 1rem;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.command-card {
+  width: 100%;
+  max-width: 36rem;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: slideDown 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.command-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.command-input-row svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+.command-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--foreground);
+  outline: none;
+}
+
+.command-kbd {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border);
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+
+.command-list {
+  padding: 0.65rem;
+  max-height: 22rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.command-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  padding: 0.45rem 0.75rem 0.25rem 0.75rem;
+}
+
+.command-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.45rem;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.12s ease;
+  text-align: left;
+}
+
+.command-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.command-item-left svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+.command-item-arrow,
+.command-item > svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.command-item:hover,
+.command-item:focus-visible {
+  background: var(--muted);
+  outline: none;
+}
+
+.command-item:hover .command-item-arrow,
+.command-item:hover > svg,
+.command-item:focus-visible .command-item-arrow,
+.command-item:focus-visible > svg {
+  color: var(--foreground);
+  transform: translate(2px, -2px);
+}
+

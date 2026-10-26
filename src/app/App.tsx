@@ -965,6 +965,40 @@ export function App() {
 
         {/* ==================================================
             SKILLS SECTION (#skills)
+            ================================================== */}
+        <section className="portfolio-section" id="skills" aria-label="Skills Section">
+          <div className="section-header">
+            <h2 className="section-title">Skills</h2>
+            <p className="section-subtitle">Interactive practical toolkit</p>
+          </div>
+
+          <div className="skills-filter-row" role="tablist" aria-label="Skill Categories">
+            {skillCategories.map((item) => (
+              <button
+                key={item.category}
+                type="button"
+                role="tab"
+                aria-selected={selectedSkillCategory === item.category}
+                className={`filter-chip ${selectedSkillCategory === item.category ? 'active' : ''}`}
+                onClick={() => setSelectedSkillCategory(item.category)}
+              >
+                <span>{item.category}</span>
+                <span className="filter-count">{item.count}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="skills-cloud" aria-live="polite">
+            {displayedSkills.map((skill) => (
+              <span className="skill-tag" key={skill}>
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================================================
+            PROJECTS SECTION (#projects)
       </main>
     </>
   )

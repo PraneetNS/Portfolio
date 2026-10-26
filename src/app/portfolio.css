@@ -171,3 +171,32 @@
   }
 }
 
+/* ==================================================
+   SECTION COMMON STYLES
+   ================================================== */
+.portfolio-section {
+  scroll-margin-top: 4.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-header {
+  margin-bottom: 1.35rem;
+}
+
+.section-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.section-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+}
+

@@ -1268,3 +1268,30 @@
   transform: translate(2px, -2px);
 }
 
+/* ==================================================
+   FOOTER SECTION
+   ================================================== */
+.portfolio-footer {
+  margin-top: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.portfolio-footer a {
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.portfolio-footer a:hover {
+  text-decoration: underline;
+}
+

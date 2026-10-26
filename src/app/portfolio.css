@@ -200,3 +200,139 @@
   margin-bottom: 0;
 }
 
+/* ==================================================
+   HERO / PROFILE HEADER (#top)
+   ================================================== */
+.hero-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2.25rem;
+  padding-bottom: 0.85rem;
+}
+
+.hero-bio-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-name {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.hero-headline {
+  font-family: var(--font-mono);
+  font-size: 1.0625rem;
+  color: var(--muted-foreground);
+  line-height: 1.65;
+  margin-top: 0.5rem;
+  max-width: 44rem;
+}
+
+.hero-social-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.15rem;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  text-decoration: none;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-btn svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.social-btn:hover {
+  background: var(--muted);
+  border-color: #d4d4d8;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px -1px rgba(0, 0, 0, 0.08);
+}
+
+.social-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.hero-avatar-wrap {
+  flex-shrink: 0;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #f8f8f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transform: scale(0.96) translateY(8px);
+  animation: revealAvatar 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.35s;
+  will-change: transform, opacity;
+}
+
+@keyframes revealFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealAvatar {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.hero-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%);
+  color: #18181b;
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  user-select: none;
+}
+

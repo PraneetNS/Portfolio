@@ -621,3 +621,158 @@
   box-shadow: 0 0 0 1px #10b981;
 }
 
+/* ==================================================
+   WRITING / BLOGS SECTION (#writing)
+   ================================================== */
+.writing-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+}
+
+.writing-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.writing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.writing-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 0.625rem;
+  background: var(--card);
+  padding: 1.25rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.writing-card:hover {
+  border-color: #d4d4d8;
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
+}
+
+.writing-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.writing-meta-row svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
+}
+
+.writing-topic-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  padding: 0.125rem 0.45rem;
+  border-radius: 0.25rem;
+  background: var(--muted);
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.writing-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  color: var(--foreground);
+  margin: 0 0 0.5rem 0;
+}
+
+.writing-card-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline;
+  transition: color 0.15s ease;
+}
+
+.writing-card-link:hover {
+  text-decoration: underline;
+}
+
+.writing-card-link svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+  opacity: 0.65;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.writing-card:hover .writing-card-link svg {
+  transform: translate(1px, -1px);
+  opacity: 1;
+}
+
+.writing-card-desc {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  flex-grow: 1;
+}
+
+.writing-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.writing-read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.writing-read-btn svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  transition: transform 0.15s ease;
+}
+
+.writing-read-btn:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.writing-read-btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.writing-toggle-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+

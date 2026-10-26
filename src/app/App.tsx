@@ -364,5 +364,17 @@ function ArrowRightIcon() {
 // --------------------------------------------------
 // SCRAMBLE / DECODING ANIMATION CONSTANTS & HELPERS
 // --------------------------------------------------
+const TARGET_NAME = 'PRANEET SAVANT'
+const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+const LETTER_INDICES = [0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13] // skips index 7 (space)
 
-export function App() { return <div className='portfolio-shell' /> }
+function getRandomChar() {
+  return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+}
+
+function generateInitialScramble() {
+  return TARGET_NAME.split('').map((char) => (char === ' ' ? ' ' : getRandomChar())).join('')
+}
+
+
+export function App() { return <div className='portfolio-shell'>{generateInitialScramble()}</div> }

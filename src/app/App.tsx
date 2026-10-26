@@ -999,6 +999,56 @@ export function App() {
 
         {/* ==================================================
             PROJECTS SECTION (#projects)
+            ================================================== */}
+        <section className="portfolio-section" id="projects" aria-label="Projects Section">
+          <div className="section-header">
+            <h2 className="section-title">Research & Engineering Projects</h2>
+            <p className="section-subtitle">Systems built, tested, and iterated</p>
+          </div>
+
+          <div className="projects-grid">
+            {projectsData.map((project) => (
+              <article className="project-card" key={project.id}>
+                <div className="project-card-top">
+                  <h3 className="project-card-title">
+                    <span className="live-indicator-dot" title="Active Project" />
+                    <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                      {project.title}
+                    </a>
+                  </h3>
+                </div>
+
+                <p className="project-card-desc">{project.description}</p>
+
+                <div className="project-tags-row">
+                  {project.stack.map((tag) => (
+                    <span className="project-tag-pill" key={tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="project-links-row">
+                  <a className="project-action-link" href={project.githubUrl} target="_blank" rel="noreferrer">
+                    <GithubIcon />
+                    <span>Source</span>
+                    <ArrowUpRight />
+                  </a>
+                  {project.liveUrl && (
+                    <a className="project-action-link" href={project.liveUrl} target="_blank" rel="noreferrer">
+                      <GlobeIcon />
+                      <span>Live Demo</span>
+                      <ArrowUpRight />
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================================================
+            EDUCATION SECTION (#education)
       </main>
     </>
   )

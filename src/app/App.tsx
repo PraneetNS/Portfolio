@@ -672,8 +672,43 @@ export function App() {
           Full-viewport clean white intro that gives way smoothly
           to the underlying portfolio (1.2s - 1.8s)
           ================================================== */}
-      <div className='portfolio-shell'>
-        <div id='top' />
+      {!introDone && (
+        <div className="intro-overlay" aria-hidden="true">
+          <div className="intro-center-hero">
+            <div className="intro-hero-name" aria-label={TARGET_NAME}>
+              <span className="scramble-word">
+                {displayedName.slice(0, 7).split('').map((char, idx) => (
+                  <span
+                    key={`first-${idx}`}
+                    className={`scramble-char ${idx < resolvedCount ? 'is-resolved' : 'is-scrambling'}`}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+              <span className="scramble-space">&nbsp;</span>
+              <span className="scramble-word">
+                {displayedName.slice(8, 14).split('').map((char, idx) => {
+                  const globalLetterIdx = idx + 7
+                  return (
+                    <span
+                      key={`last-${idx}`}
+                      className={`scramble-char ${globalLetterIdx < resolvedCount ? 'is-resolved' : 'is-scrambling'}`}
+                    >
+                      {char}
+                    </span>
+                  )
+                })}
+              </span>
+            </div>
+            <p className="intro-hero-tagline">AI ENGINEERING, INTELLIGENT SYSTEMS AT SCALE</p>
+          </div>
+        </div>
+      )}
+
+      <main className="portfolio-shell">
+        {/* ==================================================
+            HERO / PROFILE HEADER (#top)
       </div>
     </>
   )

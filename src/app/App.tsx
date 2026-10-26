@@ -1170,6 +1170,56 @@ export function App() {
           COMMAND PALETTE / MODAL (Ctrl+K / Cmd+K)
           ================================================== */}
       {commandOpen && (
+        <div
+          className="command-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Quick Command Palette"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setCommandOpen(false)
+          }}
+        >
+          <div className="command-card">
+            <div className="command-input-row">
+              <SearchIcon />
+              <input
+                ref={searchInputRef}
+                type="text"
+                className="command-input"
+                placeholder="Type a command or search section..."
+                value={commandQuery}
+                onChange={(e) => setCommandQuery(e.target.value)}
+              />
+              <span className="command-kbd">ESC</span>
+            </div>
+
+            <div className="command-list" role="menu">
+              <div className="command-group-title">NAVIGATION & ACTIONS</div>
+              {filteredCommands.length === 0 ? (
+                <div style={{ padding: '1rem', textAlign: 'center', fontSize: '0.8125rem', color: 'var(--muted-foreground)' }}>
+                  No matching commands found.
+                </div>
+              ) : (
+                filteredCommands.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    role="menuitem"
+                    className="command-item"
+                    onClick={item.action}
+                  >
+                    <div className="command-item-left">
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </div>
+                    <ArrowUpRight className="command-item-arrow" />
+                  </button>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

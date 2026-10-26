@@ -469,6 +469,212 @@ export function App() {
     }, 3100)
 
     return () => {
-    <div className='portfolio-shell' />
+      cancelAnimationFrame(rafId)
+      clearTimeout(unmountTimer)
+    }
+  }, [])
+
+  // 1. Scroll-Spy observer for active dock indicator
+  useEffect(() => {
+    const sectionIds = ['top', 'about', 'work', 'writing', 'skills', 'projects', 'education']
+    const handleScroll = () => {
+      if (isProgrammaticScrollRef.current) return
+
+      const scrollHeight = document.documentElement.scrollHeight
+      const scrollPosition = window.scrollY
+      const windowHeight = window.innerHeight
+
+      // If at or near bottom of page (within 80px), education (the last section) is definitely active
+      if (windowHeight + scrollPosition >= scrollHeight - 80) {
+        setActiveSection('education')
+        return
+      }
+
+      // If at top of page
+      if (scrollPosition < 100) {
+        setActiveSection('top')
+        return
+      }
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i]
+        const element = document.getElementById(id)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          // For education at the bottom, trigger earlier as it enters lower-mid viewport
+          const threshold = id === 'education' ? windowHeight * 0.72 : windowHeight * 0.4
+          if (rect.top <= threshold) {
+            setActiveSection(id)
+            break
+          }
+        }
+      }
+    }
+
+    const resetProgrammatic = () => {
+      isProgrammaticScrollRef.current = false
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('wheel', resetProgrammatic, { passive: true })
+    window.addEventListener('touchmove', resetProgrammatic, { passive: true })
+    handleScroll()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('wheel', resetProgrammatic)
+      window.removeEventListener('touchmove', resetProgrammatic)
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
+    }
+  }, [])
+
+  // 2. Keyboard shortcuts for Command Palette (Cmd+K / Ctrl+K and Esc)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        setCommandOpen((prev) => !prev)
+      } else if (e.key === 'Escape' && commandOpen) {
+        setCommandOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [commandOpen])
+
+  // Focus search input when command palette opens
+  useEffect(() => {
+    if (commandOpen) {
+      setTimeout(() => {
+        searchInputRef.current?.focus()
+      }, 50)
+    } else {
+      setCommandQuery('')
+    }
+  }, [commandOpen])
+
+  // 3. Filtered skills computation
+  const skillCategories = useMemo(() => {
+    const total = skillsData.reduce((acc, s) => acc + s.items.length, 0)
+    return [
+      { category: 'All', count: total },
+      ...skillsData.map((s) => ({ category: s.category, count: s.items.length })),
+    ]
+  }, [])
+  const displayedSkills = useMemo(() => {
+    if (selectedSkillCategory === 'All') {
+      return skillsData.flatMap((g) => g.items)
+    }
+    const found = skillsData.find((s) => s.category === selectedSkillCategory)
+    return found ? found.items : []
+  }, [selectedSkillCategory])
+
+  const scrollToSection = (id: string) => {
+    setCommandOpen(false)
+    setActiveSection(id)
+    isProgrammaticScrollRef.current = true
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
+    scrollTimeoutRef.current = window.setTimeout(() => {
+      isProgrammaticScrollRef.current = false
+    }, 850)
+
+    if (id === 'top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  // 4. Command palette actions
+  const commandActions = useMemo(
+    () => [
+      { label: 'Go to Home / Profile', icon: <HomeIcon />, action: () => scrollToSection('top') },
+      { label: 'Go to About', icon: <UserIcon />, action: () => scrollToSection('about') },
+      { label: 'Go to Work Experience', icon: <BriefcaseIcon />, action: () => scrollToSection('work') },
+      { label: 'Go to Writing & Essays', icon: <BookOpenIcon />, action: () => scrollToSection('writing') },
+      { label: 'Go to Skills', icon: <LayersIcon />, action: () => scrollToSection('skills') },
+      { label: 'Go to Projects', icon: <FolderGitIcon />, action: () => scrollToSection('projects') },
+      { label: 'Go to Education', icon: <GraduationCapIcon />, action: () => scrollToSection('education') },
+      {
+        label: 'Open Substack Publication (praneetsavant.substack.com)',
+        icon: <BookOpenIcon />,
+        action: () => {
+          window.open(SUBSTACK_ARCHIVE_URL, '_blank', 'noreferrer')
+          setCommandOpen(false)
+        },
+      },
+      {
+        label: 'Subscribe to Substack Newsletter',
+        icon: <MailIcon />,
+        action: () => {
+          window.open(SUBSTACK_SUBSCRIBE_URL, '_blank', 'noreferrer')
+          setCommandOpen(false)
+        },
+      },
+      {
+        label: copiedEmail ? 'Email Copied to Clipboard!' : 'Copy Email Address (hello@praneetsavant.in)',
+        icon: <MailIcon />,
+        action: () => {
+          navigator.clipboard.writeText('hello@praneetsavant.in')
+          setCopiedEmail(true)
+          setTimeout(() => setCopiedEmail(false), 2000)
+        },
+      },
+      {
+        label: 'Open GitHub Profile (PraneetNS)',
+        icon: <GithubIcon />,
+        action: () => {
+          window.open('https://github.com/PraneetNS', '_blank', 'noreferrer')
+          setCommandOpen(false)
+        },
+      },
+      {
+        label: 'Open LinkedIn Profile',
+        icon: <LinkedinIcon />,
+        action: () => {
+          window.open('https://linkedin.com/in/praneetsavant', '_blank', 'noreferrer')
+          setCommandOpen(false)
+        },
+      },
+      {
+        label: 'Open X / Twitter Profile',
+        icon: <XTwitterIcon />,
+        action: () => {
+          window.open('https://x.com/praneetsavant', '_blank', 'noreferrer')
+          setCommandOpen(false)
+        },
+      },
+      {
+        label: 'Open Clinical Documentation Demo',
+        icon: <GlobeIcon />,
+        action: () => {
+          window.open('https://clinical-sense.vercel.app', '_blank', 'noreferrer')
+          setCommandOpen(false)
+        },
+      },
+    ],
+    [copiedEmail]
+  )
+
+  const filteredCommands = useMemo(() => {
+    if (!commandQuery.trim()) return commandActions
+    return commandActions.filter((cmd) => cmd.label.toLowerCase().includes(commandQuery.toLowerCase()))
+  }, [commandActions, commandQuery])
+
+  return (
+    <>
+      {/* ==================================================
+          OPENING INTRO ANIMATION OVERLAY
+          Full-viewport clean white intro that gives way smoothly
+          to the underlying portfolio (1.2s - 1.8s)
+          ================================================== */}
+      <div className='portfolio-shell'>
+        <div id='top' />
+      </div>
+    </>
   )
 }

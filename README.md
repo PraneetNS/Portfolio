@@ -1,51 +1,109 @@
-# Praneet Savant — Portfolio
+# Praneet Savant — AI Engineer & Full-Stack Developer Portfolio
 
-A responsive personal portfolio built with React, TypeScript, and Vite. The visual direction is an original implementation inspired by the editorial layout of modern AI-engineering portfolios, customized with Praneet's projects and profile.
+A responsive, high-performance personal portfolio built with **React 19**, **TypeScript**, and **Vite**. Features an editorial design system, interactive floating dock, live command palette, Substack archive integration, and cinematic decode animations.
 
-## Run locally on Windows
+🌐 **Live Website**: [praneetsavant.in](https://praneetsavant.in) · [portfolio-praneet.vercel.app](https://portfolio-praneet.vercel.app)  
+✍️ **Substack**: [praneetsavant.substack.com](https://praneetsavant.substack.com)  
+💻 **GitHub**: [@PraneetNS](https://github.com/PraneetNS)  
+💼 **LinkedIn**: [in/praneetsavant](https://linkedin.com/in/praneetsavant)  
 
-Install Node.js (LTS) and Git, then open PowerShell in this folder:
+---
 
-```powershell
-npm ci
-npm run dev
+## ✨ Highlights & Key Features
+
+* **Cinematic Decode Intro**: Progressive left-to-right character scramble decode animation with graceful fallback for reduced motion (`prefers-reduced-motion`).
+* **Persistent Bottom Dock**: Glassmorphism navigation dock with real-time section spy tracking (`#top`, `#about`, `#work`, `#writing`, `#skills`, `#projects`, `#education`).
+* **Interactive Command Palette (`Ctrl + K` / `Cmd + K`)**: Quick-jump search modal for navigating sections, filtering projects, exploring articles, and executing actions.
+* **Verified Work Experience Timeline**: Chronological role progression with authentic company marks and badges (Edutainer, VRIF).
+* **Substack Writings Archive**: Curated technical essays covering AI inference economics, agentic systems, MoE hybrid architectures, and LLM retrieval pipelines.
+* **Interactive Project Showcase**: Deep dives into production-ready AI architectures (Aether AI Tutor, EduBot Course RAG, Clinical Documentation AI).
+* **Zero CSS Framework Bloat**: Pure vanilla CSS design tokens, smooth scroll behavior, micro-interactions, and mobile responsiveness.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+* **Build Tool**: [Vite](https://vitejs.dev/)
+* **Styling**: Vanilla CSS with custom properties (`:root` design tokens, glassmorphism, responsive grid & flexbox layouts)
+* **Audio & Haptics**: Web Audio synthesis for tactile UI interaction feedback
+* **Fonts**: Inter & JetBrains Mono (preconnect CDN)
+* **Deployment**: [Vercel](https://vercel.com/) with automated Git CI/CD
+
+---
+
+## 📁 Project Structure
+
+```text
+Portfolio-main/
+├── public/
+│   ├── favicon.svg             # Bespoke monogram brandmark
+│   └── images/                 # Company and product brand marks (Edutainer, VRIF)
+├── src/
+│   ├── app/
+│   │   ├── data/
+│   │   │   └── articles.ts     # Verified Substack articles archive data & schema
+│   │   ├── App.tsx             # Main portfolio architecture, dock, sections & modal
+│   │   ├── BrandLogo.tsx       # Custom SVG PS monogram logo component
+│   │   └── portfolio.css       # Core design system, layouts, keyframes & responsive rules
+│   ├── styles/
+│   │   └── global.css          # CSS reset, :root variables, typography & accessibility
+│   └── main.tsx                # React application root entrypoint
+├── index.html                  # HTML5 shell with Open Graph, Twitter cards, & font preconnects
+├── package.json
+├── tsconfig.app.json
+└── vite.config.ts
 ```
 
-Open the local URL printed by Vite.
+---
 
-## Validate a production build
+## 🚀 Getting Started Locally
 
-```powershell
-npm run build
-npm run preview
-```
+### Prerequisites
+* [Node.js](https://nodejs.org/) (v18+ recommended)
+* [npm](https://www.npmjs.com/) or [pnpm](https://pnpm.io/)
 
-The production output is written to `dist/`.
+### Installation & Development
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/PraneetNS/Portfolio.git
+   cd Portfolio
+   ```
 
-## Deploy to the existing Vercel project
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-1. Extract this repository and replace the contents of your existing `Portfolio` repository with these files, keeping the `.git` directory if working in your existing local clone.
-2. Test with `npm ci` and `npm run build`.
-3. Commit and push to the branch already connected to your Vercel project.
-4. Vercel should build the Vite project using `npm run build` and publish `dist`.
-5. Check the Vercel deployment preview before confirming the production deployment. Keep the existing `praneetsavant.in` domain assignment and DNS records unchanged.
+3. Start local development server:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-Do not create a new Vercel project or edit DNS for this redesign.
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+   Generates optimized assets in the `dist/` folder.
 
-## Update your content
+5. Preview production build:
+   ```bash
+   npm run preview
+   ```
 
-Most content is in `src/app/App.tsx`:
-- Intro and About
-- Project cards and repository links
-- Skill groups
-- Education and current focus
-- Contact links
+---
 
-Design and responsive behavior are in `src/app/portfolio.css`. Page title, SEO description, and social metadata are in `index.html`.
+## 🚢 Deployment
 
-## Notes
+The repository is configured for automated deployments with **Vercel**:
+* **Branch**: `main`
+* **Build Command**: `npm run build`
+* **Output Directory**: `dist`
+* **Install Command**: `npm install`
 
-- The project is built with React + TypeScript + Vite, not plain HTML files alone.
-- Project cards currently link to the owner's GitHub profile where a specific public repository URL was not known. Replace those links with direct project URLs before publishing if available.
-- The contact address is configured as `hello@praneetsavant.in`; confirm it is an inbox you use before publishing.
-- The portfolio content intentionally avoids inventing employers, job titles, awards, or publication claims.
+---
+
+## 📄 License
+
+Created by **Praneet Savant**. Code is available under the [MIT License](LICENSE).

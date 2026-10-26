@@ -1295,3 +1295,207 @@
   text-decoration: underline;
 }
 
+/* ==================================================
+   MOBILE / RESPONSIVE OVERRIDES
+   Paste at the VERY BOTTOM of src/app/portfolio.css
+   (must come after the base rules so it wins).
+   ================================================== */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  overflow-x: hidden; /* safety net; fix the real cause if you see sideways scroll */
+}
+
+.hero-name,
+.hero-headline,
+.about-content,
+.timeline-desc,
+.writing-card-title,
+.project-card-desc,
+.command-item-left span {
+  overflow-wrap: anywhere;
+}
+
+/* Touch devices: no sticky hover lift on cards */
+@media (hover: none) {
+  .writing-card:hover,
+  .project-card:hover,
+  .social-btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .command-kbd { display: none; } /* ESC badge is useless without a keyboard */
+}
+
+/* ---------- Tablet (<= 1024px) ---------- */
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Large phone / small tablet (<= 768px) ---------- */
+@media (max-width: 768px) {
+  .portfolio-shell {
+    padding: 2.5rem 1.25rem calc(7rem + env(safe-area-inset-bottom)) 1.25rem;
+    gap: 2.75rem;
+  }
+
+  .projects-grid,
+  .writing-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  /* Hero: avatar on top, text below */
+  .hero-header {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .hero-avatar-wrap {
+    order: -1;
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 0.85rem;
+  }
+  .hero-name { font-size: 1.85rem; }
+  .hero-headline { font-size: 0.9375rem; line-height: 1.6; }
+
+  .about-content { font-size: 0.9375rem; line-height: 1.7; }
+  .about-actions { flex-wrap: wrap; }
+
+  .section-title { font-size: 1.3rem; }
+  .section-subtitle { font-size: 0.75rem; }
+
+  /* Writing header: stack title and actions */
+  .writing-section-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Dates drop under the role instead of squeezing the title */
+  .timeline-header { flex-direction: column; gap: 0.25rem; }
+  .timeline-date,
+  .education-date { white-space: normal; font-size: 0.8125rem; }
+  .education-top { flex-direction: column; gap: 0.25rem; }
+}
+
+/* ---------- Phone (<= 640px) ---------- */
+@media (max-width: 640px) {
+
+  /* Bigger touch targets */
+  .social-btn { width: 2.75rem; height: 2.75rem; }
+  .action-pill-btn,
+  .project-action-link { min-height: 2.5rem; }
+  .filter-chip { min-height: 2.25rem; }
+
+  /* Skills filter: one swipeable row instead of 5 wrapped chips */
+  .skills-filter-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+    padding-bottom: 0.25rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .skills-filter-row::-webkit-scrollbar { display: none; }
+  .filter-chip { flex-shrink: 0; white-space: nowrap; }
+
+  /* Timeline: reclaim horizontal space */
+  .timeline-wrapper { padding-left: 2.9rem; gap: 2rem; }
+  .timeline-node { left: -2.9rem; width: 2.25rem; height: 2.25rem; }
+  .timeline-line { left: 1.1rem; }
+  .timeline-role { font-size: 1rem; }
+  .timeline-group-company { font-size: 1.0625rem; }
+  .timeline-desc { font-size: 0.875rem; }
+
+  /* ----- DOCK -----
+     The base dock is left:50% + translateX(-50%), which caps its width at
+     ~50vw and squashes 8 items on a phone. Make it full-width and centered. */
+  .dock-container {
+    left: 0;
+    right: 0;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom));
+    padding: 0 0.5rem;
+    display: flex;
+    justify-content: center;
+    transform: none;
+    animation-name: dockRevealMobile;
+  }
+  .dock-pill {
+    max-width: 100%;
+    gap: 2px;
+    padding: 0.3rem 0.4rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .dock-pill::-webkit-scrollbar { display: none; }
+  .dock-label { display: none; }           /* icons only */
+  .dock-item {
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .dock-divider { margin: 0 0.1rem; flex-shrink: 0; }
+
+  /* ----- COMMAND PALETTE ----- */
+  .command-overlay { padding: 3.5rem 0.75rem 0.75rem 0.75rem; }
+  .command-card { border-radius: 0.85rem; }
+  .command-input-row { padding: 0.85rem 1rem; }
+  .command-input { font-size: 16px; }       /* <16px makes iOS Safari zoom on focus */
+  .command-list { max-height: min(22rem, 55dvh); }
+  .command-item { padding: 0.8rem 0.75rem; }
+  .command-item-left { min-width: 0; }
+  .command-item-left span { white-space: normal; line-height: 1.35; }
+
+  /* Footer */
+  .portfolio-footer { flex-direction: column; align-items: flex-start; }
+}
+
+@keyframes dockRevealMobile {
+  0%, 80% {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+  96%, 100% {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+/* ---------- Small phones (<= 380px) ---------- */
+@media (max-width: 380px) {
+  .portfolio-shell { padding-inline: 1rem; }
+  .skills-filter-row { margin-inline: -1rem; padding-inline: 1rem; }
+  .hero-name { font-size: 1.65rem; }
+  .dock-item { width: 2.25rem; height: 2.25rem; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay,
+  .intro-center-hero,
+  .intro-hero-tagline,
+  .portfolio-shell,
+  .dock-container,
+  .hero-avatar-wrap {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .dock-container { transform: translateX(-50%) !important; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 640px) {
+  .dock-container { transform: none !important; }
+}
+
+

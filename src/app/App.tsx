@@ -553,6 +553,15 @@ export function App() {
     }
   }, [commandOpen])
 
+  // Lock body scroll when command palette is open on mobile/touch
+  useEffect(() => {
+    document.body.style.overflow = commandOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [commandOpen])
+
+
   // 3. Filtered skills computation
   const skillCategories = useMemo(() => {
     const total = skillsData.reduce((acc, s) => acc + s.items.length, 0)

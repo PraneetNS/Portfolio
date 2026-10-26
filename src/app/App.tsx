@@ -1067,7 +1067,109 @@ export function App() {
 
         {/* ==================================================
             FOOTER
+            ================================================== */}
+        <footer className="portfolio-footer">
+          <span>Praneet Savant © {new Date().getFullYear()}</span>
+          <a href="#top" onClick={(e) => { e.preventDefault(); scrollToSection('top'); }}>
+            Back to Top ↑
+          </a>
+        </footer>
       </main>
+
+      {/* ==================================================
+          PERSISTENT FLOATING BOTTOM DOCK
+          ================================================== */}
+      <div className="dock-container" role="toolbar" aria-label="Quick Navigation Dock">
+        <nav className="dock-pill">
+          <a
+            href="#top"
+            className={`dock-item ${activeSection === 'top' ? 'active' : ''}`}
+            onClick={(e) => { e.preventDefault(); scrollToSection('top'); }}
+            aria-label="Home / Profile"
+          >
+            <HomeIcon />
+            <span className="dock-label">Home</span>
+          </a>
+
+          <a
+            href="#about"
+            className={`dock-item ${activeSection === 'about' ? 'active' : ''}`}
+            onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}
+            aria-label="About"
+          >
+            <UserIcon />
+            <span className="dock-label">About</span>
+          </a>
+
+          <a
+            href="#work"
+            className={`dock-item ${activeSection === 'work' ? 'active' : ''}`}
+            onClick={(e) => { e.preventDefault(); scrollToSection('work'); }}
+            aria-label="Work Experience"
+          >
+            <BriefcaseIcon />
+            <span className="dock-label">Work</span>
+          </a>
+
+          <a
+            href="#writing"
+            className={`dock-item ${activeSection === 'writing' ? 'active' : ''}`}
+            onClick={(e) => { e.preventDefault(); scrollToSection('writing'); }}
+            aria-label="Writing & Essays"
+          >
+            <BookOpenIcon />
+            <span className="dock-label">Writing</span>
+          </a>
+
+          <a
+            href="#skills"
+            className={`dock-item ${activeSection === 'skills' ? 'active' : ''}`}
+            onClick={(e) => { e.preventDefault(); scrollToSection('skills'); }}
+            aria-label="Skills"
+          >
+            <LayersIcon />
+            <span className="dock-label">Skills</span>
+          </a>
+
+          <a
+            href="#projects"
+            className={`dock-item ${activeSection === 'projects' ? 'active' : ''}`}
+            onClick={(e) => { e.preventDefault(); scrollToSection('projects'); }}
+            aria-label="Projects"
+          >
+            <FolderGitIcon />
+            <span className="dock-label">Projects</span>
+          </a>
+
+          <a
+            href="#education"
+            className={`dock-item ${activeSection === 'education' ? 'active' : ''}`}
+            onClick={(e) => { e.preventDefault(); scrollToSection('education'); }}
+            aria-label="Education"
+          >
+            <GraduationCapIcon />
+            <span className="dock-label">Education</span>
+          </a>
+
+          <div className="dock-divider" aria-hidden="true" />
+
+          <button
+            type="button"
+            className="dock-item"
+            onClick={() => setCommandOpen(true)}
+            aria-label="Open Command Menu (Ctrl+K)"
+            title="Command Menu (Ctrl+K)"
+          >
+            <CommandIcon />
+            <span className="dock-label">Menu</span>
+          </button>
+        </nav>
+      </div>
+
+      {/* ==================================================
+          COMMAND PALETTE / MODAL (Ctrl+K / Cmd+K)
+          ================================================== */}
+      {commandOpen && (
     </>
   )
 }

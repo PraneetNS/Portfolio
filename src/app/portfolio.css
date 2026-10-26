@@ -1037,3 +1037,91 @@
   margin-bottom: 0;
 }
 
+/* ==================================================
+   PERSISTENT FLOATING BOTTOM DOCK
+   ================================================== */
+.dock-container {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding-bottom: env(safe-area-inset-bottom);
+  pointer-events: none;
+  animation: dockReveal 3.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dockReveal {
+  0%, 80% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+    pointer-events: none;
+  }
+  96%, 100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
+}
+
+.dock-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(228, 228, 231, 0.95);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  pointer-events: auto;
+  user-select: none;
+}
+
+.dock-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.42rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #52525b;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.dock-item svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+}
+
+.dock-item:hover {
+  color: #09090b;
+  background: rgba(244, 244, 245, 0.9);
+}
+
+.dock-item.active {
+  color: #ffffff;
+  background: #18181b;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.dock-item:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.dock-divider {
+  width: 1px;
+  height: 1.35rem;
+  background: var(--border);
+  margin: 0 0.2rem;
+}
+

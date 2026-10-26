@@ -1049,6 +1049,24 @@ export function App() {
 
         {/* ==================================================
             EDUCATION SECTION (#education)
+            ================================================== */}
+        <section className="portfolio-section" id="education" aria-label="Education Section">
+          <div className="section-header">
+            <h2 className="section-title">Education</h2>
+          </div>
+
+          <div className="education-card">
+            <div className="education-top">
+              <h3 className="education-school">S. G. Balekundri Institute of Technology</h3>
+              <span className="education-date">Belgaum, Karnataka · Graduated 2024</span>
+            </div>
+            <p className="education-degree">Bachelor of Technology (B.Tech)</p>
+            <p className="education-detail">Rigorous engineering coursework in Data Structures & Algorithms, Operating Systems, Machine Learning, Database Management Systems, and Systems Architecture.</p>
+          </div>
+        </section>
+
+        {/* ==================================================
+            FOOTER
       </main>
     </>
   )

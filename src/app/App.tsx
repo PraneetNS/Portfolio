@@ -763,6 +763,115 @@ export function App() {
 
         {/* ==================================================
             WORK EXPERIENCE / TIMELINE (#work)
+            ================================================== */}
+        <section className="portfolio-section" id="work" aria-label="Work Experience Section">
+          <div className="section-header">
+            <h2 className="section-title">Work Experience</h2>
+            <p className="section-subtitle">Engineering milestones and technical focus</p>
+          </div>
+          <div className="timeline-wrapper">
+            <div className="timeline-line" aria-hidden="true" />
+            {timelineData.map((item) => {
+              const isMultiRole = item.roles.length > 1
+
+              return (
+                <article className="timeline-item" key={item.organization}>
+                  <div className="timeline-node">
+                    <TimelineLogo item={item} />
+                  </div>
+
+                  {isMultiRole ? (
+                    // LinkedIn-style connected career progression within the same company
+                    <div className="timeline-grouped-entry">
+                      <div className="timeline-group-header">
+                        <div className="timeline-group-title-row">
+                          {item.websiteUrl ? (
+                            <a
+                              href={item.websiteUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="timeline-company-link"
+                              aria-label={`${item.organization} website (opens in new tab)`}
+                            >
+                              <h3 className="timeline-group-company">{item.organization}</h3>
+                              <ArrowUpRight />
+                            </a>
+                          ) : (
+                            <h3 className="timeline-group-company">{item.organization}</h3>
+                          )}
+                        </div>
+                        <div className="timeline-group-meta">
+                          {item.totalPeriod && <span className="timeline-group-period">{item.totalPeriod}</span>}
+                          {item.location && <span className="timeline-location">· {item.location}</span>}
+                        </div>
+                      </div>
+
+                      <div className="timeline-nested-roles">
+                        <div className="timeline-nested-line" aria-hidden="true" />
+                        {item.roles.map((subRole) => (
+                          <div className="timeline-nested-role-item" key={subRole.id}>
+                            <div className="timeline-nested-dot" aria-hidden="true" />
+                            <div className="timeline-header">
+                              <div>
+                                <h4 className="timeline-role">{subRole.role}</h4>
+                                <div className="timeline-company-row">
+                                  <span className="timeline-badge">{subRole.badge}</span>
+                                  {subRole.location && (
+                                    <span className="timeline-location">{subRole.location}</span>
+                                  )}
+                                </div>
+                              </div>
+                              <span className="timeline-date">{subRole.period}</span>
+                            </div>
+                            <p className="timeline-desc">{subRole.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    // Single-role entry (e.g. VRIF)
+                    <div>
+                      {item.roles.map((subRole) => (
+                        <div key={subRole.id}>
+                          <div className="timeline-header">
+                            <div>
+                              <h3 className="timeline-role">{subRole.role}</h3>
+                              <div className="timeline-company-row">
+                                {item.websiteUrl ? (
+                                  <a
+                                    href={item.websiteUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="timeline-company-link"
+                                    aria-label={`${item.organization} website (opens in new tab)`}
+                                  >
+                                    <span className="timeline-company">{item.organization}</span>
+                                    <ArrowUpRight />
+                                  </a>
+                                ) : (
+                                  <span className="timeline-company">{item.organization}</span>
+                                )}
+                                <span className="timeline-badge">{subRole.badge}</span>
+                                {subRole.location && (
+                                  <span className="timeline-location">{subRole.location}</span>
+                                )}
+                              </div>
+                            </div>
+                            <span className="timeline-date">{subRole.period}</span>
+                          </div>
+                          <p className="timeline-desc">{subRole.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* ==================================================
+            WRITING / BLOGS SECTION (#writing)
       </main>
     </>
   )

@@ -776,3 +776,83 @@
   margin-top: 1.25rem;
 }
 
+/* ==================================================
+   SKILLS SECTION (#skills)
+   ================================================== */
+.skills-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1.15rem;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.38rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-chip:hover {
+  background: var(--muted);
+  border-color: #d4d4d8;
+}
+
+.filter-chip.active {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.filter-count {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  margin-left: 0.4rem;
+  padding: 0.08rem 0.4rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.06);
+  color: inherit;
+}
+
+.filter-chip.active .filter-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--primary-foreground);
+}
+
+.filter-chip:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.skills-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.45rem;
+  background: var(--muted);
+  color: var(--foreground);
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.skill-tag:hover {
+  background: #e4e4e7;
+  border-color: #d4d4d8;
+}
+

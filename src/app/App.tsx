@@ -376,5 +376,99 @@ function generateInitialScramble() {
   return TARGET_NAME.split('').map((char) => (char === ' ' ? ' ' : getRandomChar())).join('')
 }
 
+export function App() {
+  const [activeSection, setActiveSection] = useState<string>('top')
+  const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>('All')
+  const [commandOpen, setCommandOpen] = useState<boolean>(false)
+  const [commandQuery, setCommandQuery] = useState<string>('')
+  const [copiedEmail, setCopiedEmail] = useState<boolean>(false)
+  const [showAllArticles, setShowAllArticles] = useState<boolean>(false)
+  const [introDone, setIntroDone] = useState<boolean>(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return true
+    }
+    return false
+  })
 
-export function App() { return <div className='portfolio-shell'>{generateInitialScramble()}</div> }
+  // Scramble decode states
+  const [displayedName, setDisplayedName] = useState<string>(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return TARGET_NAME
+    }
+    return generateInitialScramble()
+  })
+  const [resolvedCount, setResolvedCount] = useState<number>(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return LETTER_INDICES.length
+    }
+    return 0
+  })
+
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const isProgrammaticScrollRef = useRef<boolean>(false)
+  const scrollTimeoutRef = useRef<number | null>(null)
+
+  // Random letter scramble and progressive left-to-right decode animation (1.5s decode, hold, smooth exit)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplayedName(TARGET_NAME)
+      setResolvedCount(LETTER_INDICES.length)
+      setIntroDone(true)
+      return
+    }
+
+    const startTime = performance.now()
+    const pureScrambleDuration = 200 // ms of full-word rapid scramble
+    const decodeDuration = 1150 // ms for progressive left-to-right letter lock-in
+    const totalScrambleTime = pureScrambleDuration + decodeDuration // 1350ms total
+    const totalLetters = LETTER_INDICES.length // 13 letters
+
+    let rafId: number
+    let lastTick = 0
+    const frameInterval = 35 // update random letters every 35ms
+
+    const updateFrame = (now: number) => {
+      const elapsed = now - startTime
+
+      if (elapsed >= totalScrambleTime) {
+        setDisplayedName(TARGET_NAME)
+        setResolvedCount(totalLetters)
+        return
+      }
+
+      if (now - lastTick >= frameInterval) {
+        lastTick = now
+
+        let currentResolved = 0
+        if (elapsed > pureScrambleDuration) {
+          const decodeProgress = (elapsed - pureScrambleDuration) / decodeDuration
+          currentResolved = Math.min(totalLetters, Math.floor(decodeProgress * totalLetters))
+        }
+
+        const chars = TARGET_NAME.split('')
+        for (let i = 0; i < totalLetters; i++) {
+          const charIndex = LETTER_INDICES[i]
+          if (i >= currentResolved) {
+            chars[charIndex] = getRandomChar()
+          }
+        }
+
+        setDisplayedName(chars.join(''))
+        setResolvedCount(currentResolved)
+      }
+
+      rafId = requestAnimationFrame(updateFrame)
+    }
+
+    rafId = requestAnimationFrame(updateFrame)
+
+    // Unmount intro overlay after scramble (1.5s) + hold (0.9s) + transition (0.6s) = 3.0s
+    const unmountTimer = setTimeout(() => {
+      setIntroDone(true)
+    }, 3100)
+
+    return () => {
+    <div className='portfolio-shell' />
+  )
+}

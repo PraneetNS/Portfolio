@@ -739,6 +739,30 @@ export function App() {
 
         {/* ==================================================
             ABOUT SECTION (#about)
+            ================================================== */}
+        <section className="portfolio-section" id="about" aria-label="About Section">
+          <div className="section-header">
+            <h2 className="section-title">About</h2>
+          </div>
+          <div className="about-content">
+            <p>I'm a B.Tech graduate focused on the intersection of AI research and robust product engineering. I build software systems with strong theoretical grounding that are measurable, dependable, and ready to ship.</p>
+            <p>My core research focus centers on educational AI: course-grounded retrieval, multimodal document understanding, Bayesian Knowledge Tracing (BKT), and tutoring systems designed around student context and Socratic intervention.</p>
+            <p>Across the stack, I engineer Python services, low-latency APIs, database architectures, and frontend applications — from custom operating system kernels in C to production full-stack systems.</p>
+            <div className="about-actions">
+              <a className="action-pill-btn" href="mailto:hello@praneetsavant.in">
+                <MailIcon />
+                <span>Get in touch</span>
+              </a>
+              <a className="action-pill-btn" href="#projects">
+                <FolderGitIcon />
+                <span>Explore projects</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ==================================================
+            WORK EXPERIENCE / TIMELINE (#work)
       </main>
     </>
   )

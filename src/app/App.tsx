@@ -872,6 +872,99 @@ export function App() {
 
         {/* ==================================================
             WRITING / BLOGS SECTION (#writing)
+            ================================================== */}
+        <section className="portfolio-section" id="writing" aria-label="Writing and Essays Section">
+          <div className="writing-section-header">
+            <div>
+              <h2 className="section-title">Writing</h2>
+              <p className="section-subtitle">Technical deep-dives, systems analysis, and AI architecture</p>
+            </div>
+            <div className="writing-actions-row">
+              <a
+                href={SUBSTACK_SUBSCRIBE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="action-pill-btn"
+                aria-label="Subscribe to Praneet's Substack"
+              >
+                <MailIcon />
+                <span>Subscribe</span>
+              </a>
+              <a
+                href={SUBSTACK_ARCHIVE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="action-pill-btn"
+                aria-label="View all writing on Substack"
+              >
+                <span>View all writing</span>
+                <ArrowRightIcon />
+              </a>
+            </div>
+          </div>
+
+          <div className="writing-grid">
+            {(showAllArticles ? articlesData : articlesData.slice(0, 4)).map((article) => (
+              <article key={article.slug} className="writing-card">
+                <div className="writing-meta-row">
+                  <CalendarIcon />
+                  <time dateTime={article.isoDate}>{article.date}</time>
+                  <span aria-hidden="true">•</span>
+                  <span className="writing-topic-badge">{article.topic}</span>
+                  <span aria-hidden="true">•</span>
+                  <ClockIcon />
+                  <span>{article.readTime}</span>
+                </div>
+
+                <h3 className="writing-card-title">
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="writing-card-link"
+                  >
+                    {article.title}
+                    <ArrowUpRight />
+                  </a>
+                </h3>
+
+                <p className="writing-card-desc">{article.subtitle}</p>
+
+                <div className="writing-card-footer">
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="writing-read-btn"
+                  >
+                    <span>Read on Substack</span>
+                    <ArrowUpRight />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {articlesData.length > 4 && (
+            <div className="writing-toggle-row">
+              <button
+                type="button"
+                className="action-pill-btn"
+                onClick={() => setShowAllArticles((prev) => !prev)}
+                aria-label={showAllArticles ? 'Show fewer articles' : `Show all ${articlesData.length} articles`}
+              >
+                {showAllArticles ? (
+                  <span>Show fewer articles</span>
+                ) : (
+                  <span>Show all {articlesData.length} articles</span>
+                )}
+              </button>
+            </div>
+          )}
+        </section>
+
+        {/* ==================================================
+            SKILLS SECTION (#skills)
       </main>
     </>
   )

@@ -709,7 +709,37 @@ export function App() {
       <main className="portfolio-shell">
         {/* ==================================================
             HERO / PROFILE HEADER (#top)
-      </div>
+            ================================================== */}
+        <section className="portfolio-section" id="top" aria-label="Profile Header">
+          <div className="hero-header">
+            <div className="hero-bio-col">
+              <h1 className="hero-name">Praneet Savant</h1>
+              <p className="hero-headline">AI/ML engineer and full-stack developer building educational AI systems, course-grounded retrieval pipelines, and systems software.</p>
+              <div className="hero-social-row">
+                <a className="social-btn" href="mailto:hello@praneetsavant.in" aria-label="Send Email (hello@praneetsavant.in)">
+                  <MailIcon />
+                </a>
+                <a className="social-btn" href="https://github.com/PraneetNS" target="_blank" rel="noreferrer" aria-label="GitHub Profile">
+                  <GithubIcon />
+                </a>
+                <a className="social-btn" href="https://linkedin.com/in/praneetsavant" target="_blank" rel="noreferrer" aria-label="LinkedIn Profile">
+                  <LinkedinIcon />
+                </a>
+                <a className="social-btn" href="https://x.com/praneetsavant" target="_blank" rel="noreferrer" aria-label="X Profile">
+                  <XTwitterIcon />
+                </a>
+              </div>
+            </div>
+
+            <div className="hero-avatar-wrap" aria-label="Avatar of Praneet Savant">
+              <BrandLogo showText={false} size={92} />
+            </div>
+          </div>
+        </section>
+
+        {/* ==================================================
+            ABOUT SECTION (#about)
+      </main>
     </>
   )
 }

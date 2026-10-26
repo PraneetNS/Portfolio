@@ -1,0 +1,173 @@
+/* ==================================================
+   OPENING INTRO ANIMATION (RANDOM LETTER SCRAMBLE / DECODE)
+   Phase 1 (0–250ms): Rapid uppercase random character scrambling
+   Phase 2 (250–1500ms): Progressive left-to-right lock-in into PRANEET SAVANT
+   Phase 3 & 4 (1500–2400ms): Steady hold of completed name & tagline on white
+   Phase 5 (2400–3000ms): Smooth transition into portfolio and floating dock
+   ================================================== */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #ffffff;
+  pointer-events: none;
+  animation: introOverlayDissolve 3.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.intro-center-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  pointer-events: none;
+  animation: introHeroExit 3.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.intro-hero-name {
+  font-family: var(--font-sans);
+  font-size: clamp(2.35rem, 8.5vw, 6.75rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: #0f172a; /* deep dark navy */
+  text-transform: uppercase;
+  margin: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.scramble-word {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.scramble-char {
+  display: inline-block;
+  min-width: 0.65ch;
+  text-align: center;
+  transition: color 0.1s ease;
+}
+
+.scramble-char.is-scrambling {
+  color: #475569; /* distinctive muted slate during rapid scramble */
+}
+
+.scramble-char.is-resolved {
+  color: #0f172a; /* bold dark navy when locked into place */
+}
+
+.scramble-space {
+  display: inline-block;
+  width: 0.42em;
+}
+
+.intro-hero-tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6875rem, 1.4vw, 0.875rem);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  max-width: 42rem;
+  line-height: 1.5;
+  animation: taglineFadeIn 3.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (max-width: 480px) {
+  .intro-hero-name {
+    font-size: clamp(1.65rem, 8.2vw, 2.75rem);
+    white-space: normal;
+  }
+  .scramble-char {
+    min-width: 0.62ch;
+  }
+  .intro-hero-tagline {
+    letter-spacing: 0.16em;
+    font-size: 0.6875rem;
+    padding: 0 0.5rem;
+    margin-top: 1rem;
+  }
+}
+
+/* --- KEYFRAMES --- */
+
+/* White backdrop dissolve */
+@keyframes introOverlayDissolve {
+  0%, 78% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 1);
+    visibility: visible;
+  }
+  96%, 100% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+    visibility: hidden;
+  }
+}
+
+/* Center hero exit */
+@keyframes introHeroExit {
+  0%, 78% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  96%, 100% {
+    opacity: 0;
+    transform: scale(1.03) translateY(-14px);
+    visibility: hidden;
+  }
+}
+
+/* Tagline entrance & exit */
+@keyframes taglineFadeIn {
+  0%, 35% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  50%, 78% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  96%, 100% {
+    opacity: 0;
+    transform: translateY(-8px);
+    visibility: hidden;
+  }
+}
+
+/* Synchronized portfolio entrance */
+.portfolio-shell {
+  width: 100%;
+  max-width: 68rem; /* expanded width to utilize more screen space */
+  margin: 0 auto;
+  padding: 3.75rem 2rem 9rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem; /* increased vertical gaps between sections */
+  animation: portfolioReveal 3.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes portfolioReveal {
+  0%, 78% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  96%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
